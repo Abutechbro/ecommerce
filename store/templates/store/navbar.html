@@ -31,11 +31,18 @@
                     Logout
                 </button>
             </a>
+            
             {% else %}
             <a href="{% url 'login' %}">
                 <button class="btn btn-outline-dark" type="submit">
                     <i class="bi-user me-1"></i>
                     Login
+                </button>
+            </a>
+            <a href="{% url 'register' %}">
+                <button class="btn btn-outline-dark" type="submit">
+                    <i class="bi-user me-1"></i>
+                    Register
                 </button>
             </a>
             {% endif %}

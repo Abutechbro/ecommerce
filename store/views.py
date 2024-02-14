@@ -4,6 +4,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from .forms import SignUpForm
 
 # Create your views here.
 
@@ -43,11 +47,38 @@ def login_user(request):
             messages.success(request, "There was an error please try again")
 
     else:
-        return render(request, 'store/login.html', {
+        return render(request, 'store/login.html', {  
 
     })
 
+#Logout View
 def logout_user(request):
     logout(request)
     messages.success(request, ("You have Successfully Logged Out...."))
     return redirect('home')
+
+
+#Register View
+def register_user(request):
+    form = SignUpForm()
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            #login user
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, ("Your Registration is Successful"))
+            return redirect('login')
+        else:
+            messages.success(request, ("Oops there an error in your registration"))
+            return redirect('register')
+        
+    else:
+        return render(request, 'store/register.html', {
+            "form":form
+    
+    })

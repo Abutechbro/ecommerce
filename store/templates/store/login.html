@@ -13,8 +13,9 @@
  <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <!-- Bootstrap Form -->
-            <form method="POST" action="{% url 'login' %}">
+        </div>
+          <!-- Bootstrap Form -->
+          <form method="POST" action="{% url 'login' %}">
                 {% csrf_token %}
                 <div class="mb-3">
                   <label for="username" class="form-label">Username</label>
@@ -25,8 +26,9 @@
                   <input type="password" class="form-control" name="password" placeholder="Enter Your Password">
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
-              </form>
-                    </div>
+          </form><br>
+              <p>Don't Have An Account Register</p>
+              <a href="{% url 'register' %}" class="btn btn-primary">Register Here</a>
                 </div>
         </div>
     </div>
