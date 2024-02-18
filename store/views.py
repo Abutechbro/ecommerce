@@ -88,3 +88,10 @@ def register_user(request):
             "form":form
     
     })
+
+
+#Admin Dashbord View
+def admin_dashboard(request):
+    return render(request, 'store/admin_dashboard.html' , {
+            
+    })
