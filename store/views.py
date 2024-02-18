@@ -32,6 +32,13 @@ def all_product(request):
         "products":products
     })
 
+#Product Detail View
+def product_details(request,pk):
+    product = Product.objects.get(id=pk)
+    return render(request, 'store/product_details.html', {
+        "product":product
+    })
+
 #Login View
 def login_user(request):
     if request.method == "POST":
@@ -66,8 +73,7 @@ def register_user(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-
+            password = form.cleaned_data['password1']
             #login user
             user = authenticate(username=username, password=password)
             login(request, user)
