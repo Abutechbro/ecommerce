@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product
+from .models import Product, Category
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse
@@ -88,6 +88,23 @@ def register_user(request):
             "form":form
     
     })
+
+
+#Category View
+def category(request, foo):
+    #replace Hyphens with Space
+    foo = foo.replace('-', ' ')
+    #Grab the Category fronm the URL
+    try:
+        #Look Up The Category
+        category = Category.objects.get(name=foo)
+        products = Product.objects.filter(category=category)
+        return render(request, 'store/category.html', {
+            'products':products, 'category':category
+        })
+    except:
+        messages.success(request, ('That Category doesnt exist'))
+        return redirect('home')
 
 
 #Admin Dashbord View
