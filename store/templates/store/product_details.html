@@ -28,6 +28,8 @@
                         </div>
                         {% endif %}
 
+                        
+
                         <!-- Product image-->
                         <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
                         <!-- Product details-->
@@ -51,6 +53,16 @@
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
                             <button type="button" value="{{ product.id }}" class="btn btn-outline-dark text-center mt-auto" id="add-cart" >Add to Cart</button>
                             <!-- <div class="text-center"><a ctype="button" value="{{ product.id }}" class="btn btn-outline-dark text-center mt-auto" id="add-cart" href="#">Add to Cart</a></div> -->
+                            <br><br>
+                            <div>Quantity</div>
+                            <select class="form-select" id="qty-cart">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                              </select>
+                        <br><br>
                         </div>
                     </div><br><br>
                     <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'prod' %}">All Products</a></div>
@@ -69,6 +81,7 @@
                 url: "{% url 'cart_add' %}",
                 data: {
                     product_id: $('#add-cart').val(),
+                    product_qty: $('#qty-cart option:selected').text(),
                     csrfmiddlewaretoken: '{{ csrf_token }}',
                     action: 'post'
                 },

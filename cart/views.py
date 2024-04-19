@@ -24,12 +24,13 @@ def cart_add(request):
     if request.POST.get('action') == 'post':
         #Get Stuff
         product_id = int(request.POST.get('product_id'))
+        product_qty = int(request.POST.get('product_qty'))
 
         #Look up Product in the Database
         product = get_object_or_404(Product, id=product_id)
 
         #Save to Session
-        cart.add(product=product)
+        cart.add(product=product, quanity=product_qty)
 
         #Get Cart Quantity
         cart_quantity = cart.__len__()

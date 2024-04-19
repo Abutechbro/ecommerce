@@ -15,15 +15,17 @@ class Cart():
         #Make sure cart is available on the page of site
         self.cart = cart
 
-    def add(self, product):
+    def add(self, product, quanity):
         product_id = str(product.id)
+        product_qty = str(quanity)
 
         #Logic
 
         if product_id in self.cart:
             pass
         else:
-            self.cart[product_id] = {'price': str(product.price)}
+            # self.cart[product_id] = {'price': str(product.price)}
+            self.cart[product_id] = int(product_qty)
         
         self.session.modified = True
 
@@ -36,7 +38,9 @@ class Cart():
         #Get Ids from Cart
         product_ids = self.cart.keys()
         #Use IDS to lookup products in Database model
+        
         product = Product.objects.filter(id__in=product_ids)
         #Return Looked up Products
         return product
 
+ 
