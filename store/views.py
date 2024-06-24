@@ -112,3 +112,10 @@ def admin_dashboard(request):
     return render(request, 'store/admin_dashboard.html' , {
             
     })
+
+
+def category_summary(request):
+    categories = Category.objects.all()
+    return render(request, 'store/category_summary.html',{
+        'categories':categories
+    })
