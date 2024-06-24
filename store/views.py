@@ -7,7 +7,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .forms import SignUpForm
+from .forms import SignUpForm, UpdateUserFrom
 
 # Create your views here.
 
@@ -119,3 +119,20 @@ def category_summary(request):
     return render(request, 'store/category_summary.html',{
         'categories':categories
     })
+
+
+def update_user(request):
+    if request.user.is_authenticated:
+        current_user = User.objects.get(id=request.user.id)
+        user_form = UpdateUserFrom(request.POST or None, instance=current_user)
+        if user_form.is_valid():
+            user_form.save()
+
+            login(request, current_user)
+            messages.success(request, "Profile Updated Successfully!!")
+            return redirect('home')
+        return render(request, 'store/update_user.html',  {'user_form': user_form})
+    else:
+        messages.success(request, "You need to login to update your profile")
+        return redirect('home')
+   

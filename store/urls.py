@@ -13,4 +13,5 @@ urlpatterns = [
     path('admin_dashboard/', views.admin_dashboard, name="admin_dashboard"),
     path('category/<str:foo>', views.category, name="category"),
     path('category_summary', views.category_summary, name="category_sum"),
+    path('update_user', views.update_user, name="update_user"),
 ]
