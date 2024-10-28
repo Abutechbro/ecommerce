@@ -55,6 +55,12 @@
                     Logout
                 </button>
             </a>
+            <a href="{% url 'update_user' %}" class="m-5">
+                <button class="btn btn-outline-dark m-5" type="submit">
+                    <i class="bi-user me-1"></i>
+                    Update Profile
+                </button>
+            </a>
             {% else %}
             <a href="{% url 'login' %}">
                 <button class="btn btn-outline-dark mr-5" type="submit">
